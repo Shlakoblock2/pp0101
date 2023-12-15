@@ -11,5 +11,5 @@ app = fastapi.FastAPI()
 if __name__ == '__main__':
     DbManager('SERVER/SQL/kindergarten.db').create_base('SERVER/SQL/base.sql')
 
-    uvicorn.run("serverStart:app", reload=True, host='127.0.0.1')
+    uvicorn.run("serverStart:app", reload=False, host='127.0.0.1')
 

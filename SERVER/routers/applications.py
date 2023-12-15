@@ -1,28 +1,28 @@
 from fastapi import APIRouter
-from SERVER.SQL.models import Cart
-from SERVER.resolvers import cart
+from SERVER.SQL.models import Applications
+from SERVER.resolvers import applications
 
-router = APIRouter(prefix='/Cart', tags=['Cart'])
+router = APIRouter(prefix='/Applications', tags=['Applications'])
 
 @router.post('/create')
-def create(_Cart: Cart) -> int:
-    new_id = cart.create(_Cart)
-    return f'{{code: 201, id: {new_id}}}'
+def create(_Applications: Applications):
+    new_id = applications.create(_Applications)
+    return new_id
 
-@router.get('/get/{cart_id}')
-def get(cart_id: int) -> Cart | None:
-    return cart.get(cart_id)
+@router.get('/get/{applications_id}')
+def get(applications_id: int) -> Applications | None:
+    return applications.get(applications_id)
 
 @router.get('/')
-def get_all() -> list[Cart] | None:
-    return cart.get_all()
+def get_all():
+    return applications.get_all()
 
-@router.get('/remove/{cart_id}')
-def remove(cart_id: int) -> None:
-    return cart.remove(cart_id)
+@router.get('/remove/{applications_id}')
+def remove(applications_id: int) -> None:
+    return applications.remove(applications_id)
 
 
-@router.put("/update/{cart_id}")
-def update(cart_id: int, new_data: Cart):
-    return cart.update(cart_id=cart_id, new_data=new_data)
+@router.put("/update/{applications_id}")
+def update(applications_id: int, new_data: Applications):
+    return applications.update(applications_id=applications_id, new_data=new_data)
 
